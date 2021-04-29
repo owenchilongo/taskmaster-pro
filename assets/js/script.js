@@ -270,8 +270,8 @@ $(".list-group").on("change", "input[type='text']", function() {
 // remove all tasks
 $("#remove-tasks").on("click", function() {
   for (var key in tasks) {
-    tasks[key].length = 0;
-    $("#list-" + key).empty();
+     tasks[key].length = 0;
+     $("#list-" + key).empty();
   }
   console.log(tasks);
   saveTasks();
