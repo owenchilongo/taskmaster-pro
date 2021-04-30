@@ -280,7 +280,7 @@ $("#remove-tasks").on("click", function() {
 // load tasks for the first time
 loadTasks();
 
-// audit task due dates every 30 minutes
+// audit task due dates every 30 minutes.
 setInterval(function() {
   $(".card .list-group-item").each(function() {
     auditTask($(this));
