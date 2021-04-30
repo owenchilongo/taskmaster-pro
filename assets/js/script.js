@@ -49,11 +49,9 @@ var saveTasks = function() {
 var auditTask = function(taskEl) {
   // get date from task element
   var date = $(taskEl).find("span").text().trim();
-  console.log(date);
 
   // convert to moment object at 5:00pm
   var time = moment(date, "L").set("hour", 17);
-  console.log(time);
 
   // remove any old classes from element
   $(taskEl).removeClass("list-group-item-warning list-group-item-danger");
@@ -117,7 +115,10 @@ $(".card .list-group").sortable({
     // update array on tasks object and save
     tasks[arrName] = tempArr;
     saveTasks();
-  }
+  },
+  // stop: function(event) {
+  //   $(this).removeClass("dropover");
+  // }
 });
 
 // trash icon can be dropped onto
@@ -134,6 +135,7 @@ $("#trash").droppable({
     $(".bottom-trash").addClass("bottom-trash-active");
   },
   out: function(event, ui) {
+    console.log(ui);
     $(".bottom-trash").removeClass("bottom-trash-active");
   }
 });
@@ -158,7 +160,7 @@ $("#task-form-modal").on("shown.bs.modal", function() {
 });
 
 // save button in modal was clicked
-$("#task-form-modal .btn-saved").click(function() {
+$("#task-form-modal .btn-save").click(function() {
   // get form values
   var taskText = $("#modalTaskDescription").val();
   var taskDate = $("#modalDueDate").val();
@@ -280,7 +282,7 @@ $("#remove-tasks").on("click", function() {
 // load tasks for the first time
 loadTasks();
 
-// audit task due dates every 30 minutes.
+// audit task due dates every 30 minutes
 setInterval(function() {
   $(".card .list-group-item").each(function() {
     auditTask($(this));
